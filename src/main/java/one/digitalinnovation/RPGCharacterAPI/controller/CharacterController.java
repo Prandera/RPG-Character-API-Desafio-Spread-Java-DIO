@@ -29,13 +29,18 @@ public class CharacterController {
     }
 
     @GetMapping
-    public List<CharacterDTO> listAll(){
+    public List<CharacterDTO> listAll() {
         return characterService.listAll();
     }
 
     @GetMapping("/{id}")
     public CharacterDTO findById(@PathVariable Long id) throws CharacterNotFoundException {
         return characterService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody @Valid CharacterDTO characterDTO) throws CharacterNotFoundException {
+        return characterService.updateById(id, characterDTO);
     }
 
     @DeleteMapping("/{id}")

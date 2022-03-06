@@ -28,10 +28,7 @@ public class CharacterService {
         Character characterToSave = characterMapper.toModel(characterDTO);
 
         Character savedCharacter = characterRepository.save(characterToSave);
-        return MessageResponseDTO
-                .builder()
-                .message("Created character with ID " + savedCharacter.getId())
-                .build();
+        return createMessageResponse(savedCharacter.getId(), "Created character with ID ");
     }
 
     public List<CharacterDTO> listAll() {
@@ -51,9 +48,26 @@ public class CharacterService {
         characterRepository.deleteById(id);
     }
 
+
+    public MessageResponseDTO updateById(Long id, CharacterDTO characterDTO) throws CharacterNotFoundException {
+        verifyIfExists(id);
+
+        Character characterToUpdate = characterMapper.toModel(characterDTO);
+
+        Character updatedCharacter = characterRepository.save(characterToUpdate);
+        return createMessageResponse(updatedCharacter.getId(), "Updated character with ID ");
+    }
+
     private Character verifyIfExists(Long id) throws CharacterNotFoundException {
         return characterRepository
                 .findById(id)
                 .orElseThrow(() -> new CharacterNotFoundException(id));
+    }
+
+    private MessageResponseDTO createMessageResponse(Long id, String message) {
+        return MessageResponseDTO
+                .builder()
+                .message(message + id)
+                .build();
     }
 }
