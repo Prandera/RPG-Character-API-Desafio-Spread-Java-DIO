@@ -14,7 +14,6 @@
 > ### - Desenvolvimento do MapStrucure,
 > ### - Criação de exceptions personalizadas,
 > ### - Finalização da construção da API,
-> ### - Testando a aplicação e realizando Pull Request,
-> ### - Ultimas revisões e detalhamento do projeto.
+> ### - Testando a aplicação e realizando Pull Request.
 
 
