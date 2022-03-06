@@ -8,6 +8,9 @@ import one.digitalinnovation.RPGCharacterAPI.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CharacterService {
 
@@ -28,5 +31,12 @@ public class CharacterService {
                 .builder()
                 .message("Created character with ID " + savedCharacter.getId())
                 .build();
+    }
+
+    public List<CharacterDTO> listAll() {
+        List<Character> allCharacter = characterRepository.findAll();
+        return allCharacter.stream()
+                .map(characterMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }
