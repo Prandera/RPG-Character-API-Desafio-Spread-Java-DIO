@@ -2,8 +2,7 @@ package one.digitalinnovation.RPGCharacterAPI.controller;
 
 import one.digitalinnovation.RPGCharacterAPI.dto.request.CharacterDTO;
 import one.digitalinnovation.RPGCharacterAPI.dto.response.MessageResponseDTO;
-import one.digitalinnovation.RPGCharacterAPI.entity.Character;
-import one.digitalinnovation.RPGCharacterAPI.exception.PersonNotFoundException;
+import one.digitalinnovation.RPGCharacterAPI.exception.CharacterNotFoundException;
 import one.digitalinnovation.RPGCharacterAPI.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +34,13 @@ public class CharacterController {
     }
 
     @GetMapping("/{id}")
-    public CharacterDTO findById(@PathVariable Long id) throws PersonNotFoundException {
+    public CharacterDTO findById(@PathVariable Long id) throws CharacterNotFoundException {
         return characterService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) throws CharacterNotFoundException {
+        characterService.delete(id);
     }
 }
